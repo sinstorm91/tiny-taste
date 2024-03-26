@@ -48,6 +48,11 @@ class ProfileViewSet(viewsets.ModelViewSet):
 def random_food(request):
     if request.method == 'GET':
         food = Food.objects.order_by('?')[0]
-        serializer = FoodSerializer(food, many=False)
+
+        serializer_context = {
+            'request': request,
+        }
+
+        serializer = FoodSerializer(food, context=serializer_context, many=False)
         return Response(serializer.data)
     return Response({"message": "Only GET allowed"})
