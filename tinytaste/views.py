@@ -5,8 +5,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from tinytaste.models import Food
-from tinytaste.serializers import FoodSerializer
+from tinytaste.models import Food, Ingredient, Profile
+from tinytaste.serializers import FoodSerializer, IngredientSerializer, ProfileSerializer
 
 
 def index(request):
@@ -32,6 +32,16 @@ def random_food_old(request):
 class FoodViewSet(viewsets.ModelViewSet):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
+
+
+class IngredientViewSet(viewsets.ModelViewSet):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 
 @api_view(['GET'])
